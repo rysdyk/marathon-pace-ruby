@@ -6,9 +6,13 @@ require 'time'
 # if mile pace, here is your finish time and goal estimates
 
 # irb -r ./marathon_analysis.rb
+# once in irb: load './marathon_analysis.rb'
 
 #get mile avg based on final time.
 def average_mile(finish_time)
+  raise ArguementError, "Please submit valid time" unless Time.parse(finish_time)
+  raise ArgumentError, "Time format should be H:MM:SS or H:MM" if finish_time.length < 5
+
   t = Time.parse(finish_time)
   seconds = t.hour * 3600 + t.min * 60
   mile = seconds / 26.2
@@ -16,15 +20,18 @@ def average_mile(finish_time)
   decimal_to_seconds(minutes)
 end
 
-# convert decimals into seconds
+# convert decimals (8.5 minutes) into seconds (08:30)
 def decimal_to_seconds(x)
   y = x % 1
   y = y * 60
-  return "#{sprintf("%02d", x.floor)}:#{sprintf("%02d", y.round(2))}"
+  z = y % 1 * 10
+  return "#{sprintf("%02d", x.floor)}:#{sprintf("%02d", y)}.#{z.round}"
 end
 
 # calculate per mile splits of marathon
 def splits(marathon_time)
+  raise ArgumentError, "Time format should be H:MM:SS or H:MM" if marathon_time.length < 4
+
   miles = (0..26).to_a
   miles << 26.2
   miles.insert(14, 13.1)
@@ -41,11 +48,17 @@ def splits(marathon_time)
     pace = "#{minute/60 % 60}:#{ sprintf("%02d", minute % 60) }:#{sprintf("%02d", (seconds * 60).floor )}"
 
     puts "#{m} - #{pace}"
+
+    if m == 1
+      @pace = pace
+    end
   end
+
+  return "Average mile time of: #{@pace}"
 end
 
 # takes finish time and prints out splits and average mile pace
-def finish_time(result)
+def finish_time_to_splits(result)
   splits(result)
   average = average_mile(result)
   puts "Average mile time: #{average}"
@@ -70,7 +83,7 @@ def mile_pace(mile_time)
   # splits(marathon_time)
 end
 
-# takes total time for any event and returns mile pace 
+# takes total time for any event and returns mile pace
 def pace(finish_time, distance)
   # takes finish_time of any distance and returns out mile pace
   t = Time.parse(finish_time)
@@ -80,6 +93,7 @@ def pace(finish_time, distance)
   mile_seconds = (seconds / 60) % 1
   mile_seconds = 60 * mile_seconds
   pace = "#{sprintf("%02d", mile_minutes)}:#{sprintf("%02d", mile_seconds.round)}"
+  return "#{pace} per mile"
   # if distance is array, returns out splits
 end
 
