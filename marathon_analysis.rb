@@ -10,8 +10,8 @@ require 'time'
 
 #get mile avg based on final time.
 def average_mile(finish_time)
-  raise ArguementError, "Please submit valid time" unless Time.parse(finish_time)
-  raise ArgumentError, "Time format should be H:MM:SS or H:MM" if finish_time.length < 5
+  raise ArguementError, "Please submit a valid finish time" unless Time.parse(finish_time)
+  raise ArgumentError, "Time format should be 'H:MM:SS' or 'H:MM'" if finish_time.length < 5
 
   t = Time.parse(finish_time)
   seconds = t.hour * 3600 + t.min * 60
@@ -30,7 +30,7 @@ end
 
 # calculate per mile splits of marathon
 def splits(marathon_time)
-  raise ArgumentError, "Time format should be H:MM:SS or H:MM" if marathon_time.length < 4
+  raise ArgumentError, "Time format should be 'H:MM:SS' or 'H:MM'" if marathon_time.length < 4
 
   miles = (0..26).to_a
   miles << 26.2
@@ -86,6 +86,10 @@ end
 # takes total time for any event and returns mile pace
 def pace(finish_time, distance)
   # takes finish_time of any distance and returns out mile pace
+
+  raise ArgumentError, "Finish time format should be 'H:MM:SS' or 'H:MM'" if finish_time.length < 4
+  raise ArgumentError, "distance should be a number" unless distance.is_a?(Numeric)
+
   t = Time.parse(finish_time)
   total_seconds = t.hour * 3600 + t.min * 60 + t.sec
   seconds = total_seconds / distance
