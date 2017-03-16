@@ -1,6 +1,6 @@
 require './marathon_analysis'
 
-p "Do you have marathon finish time (1) or marathon mile pace (2) or other distance (3). Type 'exit' or 'quit' to quit."
+p "Do you have marathon finish time (1) or marathon mile pace (2) or other time/distance (3)."
 input = gets.chomp
 
 def guide(input)
