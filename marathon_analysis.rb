@@ -24,7 +24,7 @@ end
 def decimal_to_seconds(x)
   y = x % 1
   y = y * 60
-  z = y % 1 * 10
+  z = y % 1 * 10  # this adds decimal to time -- still need to decide whether to keep this
   return "#{sprintf("%02d", x.floor)}:#{sprintf("%02d", y)}.#{z.round}"
 end
 
@@ -57,7 +57,7 @@ def splits(marathon_time)
   return "Average mile time of: #{@pace}"
 end
 
-# takes finish time and prints out splits and average mile pace
+# combines splits and average mile
 def finish_time_to_splits(result)
   splits(result)
   average = average_mile(result)
@@ -65,6 +65,7 @@ def finish_time_to_splits(result)
 end
 
 # takes mile pace and figures out total marathon finish time
+# 00:08:30
 def mile_pace(mile_time)
   # requires hour in mile time
   t = Time.parse(mile_time)
@@ -79,6 +80,7 @@ def mile_pace(mile_time)
   # the fast way to do all of that
   # time = Time.at(total_seconds).utc.strftime("%H:%M:%S")
   time = "#{sprintf("%02d", hours)}:#{sprintf("%02d", minutes)}:#{sprintf("%02d", seconds)}"
+  @time = time
   return time
   # splits(marathon_time)
 end
@@ -97,6 +99,7 @@ def pace(finish_time, distance)
   mile_seconds = (seconds / 60) % 1
   mile_seconds = 60 * mile_seconds
   pace = "#{sprintf("%02d", mile_minutes)}:#{sprintf("%02d", mile_seconds.round)}"
+  @pace = pace
   return "#{pace} per mile"
   # if distance is array, returns out splits
 end
