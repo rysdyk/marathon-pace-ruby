@@ -5,7 +5,7 @@ input = gets.chomp
 
 def guide(input)
   if input == "1"
-    puts "what is your finish time? ex: 'H:MM:SS' "
+    puts "Enter your finish time: (ex: 'H:MM:SS') "
     finish_time = gets.chomp
     finish_time_to_splits(finish_time)
   end

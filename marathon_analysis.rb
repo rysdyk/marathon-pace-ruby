@@ -1,7 +1,5 @@
 require 'time'
 
-# 'would you like to enter mile pace or finish time?'
-# get that time
 # if marathon time, here are your splits and goal estimates
 # if mile pace, here is your finish time and goal estimates
 
@@ -14,9 +12,9 @@ def average_mile(finish_time)
   raise ArgumentError, "Time format should be 'H:MM:SS' or 'H:MM'" if finish_time.length < 5
 
   t = Time.parse(finish_time)
-  seconds = t.hour * 3600 + t.min * 60
-  mile = seconds / 26.2
-  minutes = mile / 60
+  total_seconds(t)
+  seconds_per_mile(@seconds)
+  minutes = @seconds_per_mile / 60
   decimal_to_seconds(minutes)
 end
 
@@ -30,18 +28,16 @@ end
 
 # calculate per mile splits of marathon
 def splits(marathon_time)
-  raise ArgumentError, "Time format should be 'H:MM:SS' or 'H:MM'" if marathon_time.length < 4
+  raise ArgumentError, "Time format should be 'H:MM:SS' or 'HH:MM'" if marathon_time.length < 4
 
-  miles = (0..26).to_a
-  miles << 26.2
-  miles.insert(14, 13.1)
+  generate_splits(26.2)
 
   t = Time.parse(marathon_time)
-  seconds = t.hour * 3600 + t.min * 60 + t.sec
-  mile_seconds = seconds / 26.2
+  total_seconds(t)
+  seconds_per_mile(@seconds)
 
-  miles.each do |m|
-    time = m.to_f * mile_seconds.to_f
+  @splits.each do |m|
+    time = m.to_f * @seconds_per_mile.to_f
     minutes = time / 60
     minute = minutes.floor
     seconds = minutes % 1
@@ -49,12 +45,7 @@ def splits(marathon_time)
 
     puts "#{m} - #{pace}"
 
-    if m == 1
-      @pace = pace
-    end
   end
-
-  return "Average mile time of: #{@pace}"
 end
 
 # combines splits and average mile
@@ -70,8 +61,8 @@ def mile_pace(mile_time)
   # requires hour in mile time
   t = Time.parse(mile_time)
   # convert minutes into seconds
-  mile_seconds = t.min * 60 + t.sec
-  total_seconds = mile_seconds * 26.2
+  total_seconds(t)
+  total_seconds = @seconds * 26.2
   total_minutes = total_seconds / 60
   hours = (total_minutes / 60).floor
   minutes = (total_minutes % 60).floor
@@ -87,14 +78,13 @@ end
 
 # takes total time for any event and returns mile pace
 def pace(finish_time, distance)
-  # takes finish_time of any distance and returns out mile pace
 
   raise ArgumentError, "Finish time format should be 'H:MM:SS' or 'H:MM'" if finish_time.length < 4
   raise ArgumentError, "distance should be a number" unless distance.is_a?(Numeric)
 
   t = Time.parse(finish_time)
-  total_seconds = t.hour * 3600 + t.min * 60 + t.sec
-  seconds = total_seconds / distance
+  total_seconds(t)
+  seconds = @seconds / distance
   mile_minutes = (seconds / 60).floor
   mile_seconds = (seconds / 60) % 1
   mile_seconds = 60 * mile_seconds
@@ -102,6 +92,28 @@ def pace(finish_time, distance)
   @pace = pace
   return "#{pace} per mile"
   # if distance is array, returns out splits
+end
+
+def total_seconds(time)
+  @seconds = time.hour * 3600 + time.min * 60 + time.sec
+end
+
+def seconds_per_mile(seconds)
+  @seconds_per_mile = seconds / 26.2
+end
+
+def generate_splits(distance)
+  splits = (0..distance).to_a
+
+  if distance >= 13.1
+    splits.insert(14, 13.1)
+  end
+
+  if distance >= 26.2
+    splits.insert(28, 26.2)
+  end
+
+  @splits = splits
 end
 
 #def goals
