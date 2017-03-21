@@ -1,6 +1,6 @@
 require './marathon_analysis'
 
-p "Do you have marathon finish time (1) or marathon mile pace (2) or other time/distance (3)."
+p "Do you have (1) marathon finish time; or (2) marathon mile pace; or (3) other time/distance. (Enter Number)"
 input = gets.chomp
 
 def guide(input)
@@ -37,6 +37,7 @@ while true
     num = gets.chomp
     guide(num)
   else
+    puts "Thank you."
     exit
   end
 end
