@@ -57,22 +57,18 @@ end
 # takes mile pace and figures out total marathon finish time
 # 00:08:30
 def mile_pace(mile_time)
-  # requires hour in mile time
-  t = Time.parse(mile_time)
-  # convert minutes into seconds
-  total_seconds(t)
-  total_seconds = @seconds * 26.2
-  total_minutes = total_seconds / 60
-  hours = (total_minutes / 60).floor
-  minutes = (total_minutes % 60).floor
-  seconds = total_minutes % 1
-  seconds = (60 * seconds).round
+  raise ArgumentError, "Mile time format should be 'MM:SS' " if mile_time.length < 3
+
+  arrTime = mile_time.split(":")
+  arrTimeMins = arrTime[0]
+  arrTimeSecs = arrTime[1]
+  total_seconds = (arrTimeMins.to_i * 60 + arrTimeSecs.to_i) * 26.2
+
   # the fast way to do all of that
-  # time = Time.at(total_seconds).utc.strftime("%H:%M:%S")
-  time = "#{sprintf("%02d", hours)}:#{sprintf("%02d", minutes)}:#{sprintf("%02d", seconds)}"
+  time = Time.at(total_seconds).utc.strftime("%H:%M:%S")
+
   @time = time
   return time
-  # splits(marathon_time)
 end
 
 # takes total time for any event and returns mile pace

@@ -16,7 +16,7 @@ class MileTest < MiniTest::Test
   end
 
   def test_mile_pace_to_finish_time
-    assert_equal "03:59:44", mile_pace("0:09:09")
+    assert_equal "03:59:43", mile_pace("9:09")
   end
 
   def test_pace
