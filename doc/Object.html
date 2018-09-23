@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Object - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">BasicObject
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-average_mile">#average_mile</a>
+    
+    <li ><a href="#method-i-decimal_to_seconds">#decimal_to_seconds</a>
+    
+    <li ><a href="#method-i-finish_time">#finish_time</a>
+    
+    <li ><a href="#method-i-mile_pace">#mile_pace</a>
+    
+    <li ><a href="#method-i-splits">#splits</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Object">
+  <h1 id="class-Object" class="class">
+    class Object
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-average_mile" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">average_mile</span><span
+            class="method-args">(finish_time)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>get mile avg based on final time.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="average_mile-source">
+            <pre><span class="ruby-comment"># File marathon_analysis.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">average_mile</span>(<span class="ruby-identifier">finish_time</span>)
+  <span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">finish_time</span>)
+  <span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">t</span>.<span class="ruby-identifier">hour</span> <span class="ruby-operator">*</span> <span class="ruby-value">3600</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span>
+  <span class="ruby-identifier">mile</span> = <span class="ruby-identifier">seconds</span> <span class="ruby-operator">/</span> <span class="ruby-value">26.2</span>
+  <span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">mile</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>
+  <span class="ruby-identifier">decimal_to_seconds</span>(<span class="ruby-identifier">minutes</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-decimal_to_seconds" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">decimal_to_seconds</span><span
+            class="method-args">(x)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>convert decimals into seconds</p>
+          
+          
+
+          
+          <div class="method-source-code" id="decimal_to_seconds-source">
+            <pre><span class="ruby-comment"># File marathon_analysis.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">decimal_to_seconds</span>(<span class="ruby-identifier">x</span>)
+  <span class="ruby-identifier">y</span> = <span class="ruby-identifier">x</span> <span class="ruby-operator">%</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">y</span> = <span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{sprintf(&quot;%02d&quot;, x.floor)}:#{sprintf(&quot;%02d&quot;, y.round(2))}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-finish_time" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">finish_time</span><span
+            class="method-args">(result)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="finish_time-source">
+            <pre><span class="ruby-comment"># File marathon_analysis.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">finish_time</span>(<span class="ruby-identifier">result</span>)
+  <span class="ruby-identifier">splits</span>(<span class="ruby-identifier">result</span>)
+  <span class="ruby-identifier">average</span> = <span class="ruby-identifier">average_mile</span>(<span class="ruby-identifier">result</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Average mile time: #{average}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-mile_pace" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">mile_pace</span><span
+            class="method-args">(mile_time)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="mile_pace-source">
+            <pre><span class="ruby-comment"># File marathon_analysis.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">mile_pace</span>(<span class="ruby-identifier">mile_time</span>)
+  <span class="ruby-comment"># convert minutes into seconds</span>
+  <span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">mile_time</span>)
+  <span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">t</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">sec</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">seconds</span>
+
+  <span class="ruby-comment"># splits(marathon_time)</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-splits" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">splits</span><span
+            class="method-args">(marathon_time)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>calculate per mile splits of marathon</p>
+          
+          
+
+          
+          <div class="method-source-code" id="splits-source">
+            <pre><span class="ruby-comment"># File marathon_analysis.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">splits</span>(<span class="ruby-identifier">marathon_time</span>)
+  <span class="ruby-identifier">miles</span> = (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">26</span>).<span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">miles</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">26.2</span>
+  <span class="ruby-identifier">miles</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">14</span>, <span class="ruby-value">13.1</span>)
+
+  <span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">marathon_time</span>)
+  <span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">t</span>.<span class="ruby-identifier">hour</span> <span class="ruby-operator">*</span> <span class="ruby-value">3600</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">sec</span>
+  <span class="ruby-identifier">mile_seconds</span> = <span class="ruby-identifier">seconds</span> <span class="ruby-operator">/</span> <span class="ruby-value">26.2</span>
+
+  <span class="ruby-identifier">miles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">time</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">mile_seconds</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>
+    <span class="ruby-identifier">minute</span> = <span class="ruby-identifier">minutes</span>.<span class="ruby-identifier">floor</span>
+    <span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">minutes</span> <span class="ruby-operator">%</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">pace</span> = <span class="ruby-node">&quot;#{minute/60 % 60}:#{ sprintf(&quot;%02d&quot;, minute % 60) }:#{sprintf(&quot;%02d&quot;, (seconds * 60).floor )}&quot;</span>
+
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{m} - #{pace}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -117,8 +117,6 @@ end
     # hint: 23 seconds per mile to finish 10 minutes faster
 #end
 
-# add raise exceptions if numbers not right...
-
 # note that these are estimates since half a second per mile over a marathon is 13 seconds.
 
-# realistic split difference aka mile 1 will be faster than mile 26
+# add realistic split increases -- aka, mile 1 will be faster than mile 26

@@ -1,7 +1,7 @@
 # ruby tests/marathon_test.rb
 
 require 'minitest/autorun'
-require './marathon_analysis.rb'
+require '../marathon_analysis.rb'
 
 class MileTest < MiniTest::Test
 

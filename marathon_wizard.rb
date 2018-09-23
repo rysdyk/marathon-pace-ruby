@@ -11,7 +11,7 @@ def guide(input)
   end
 
   if input == "2"
-   puts "what is your mile time? ex: 'H:MM:SS' "
+   puts "what is your mile time? ex: 'MM:SS' "
    mile_time = gets.chomp
    mile_pace(mile_time)
    puts @time
